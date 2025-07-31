@@ -5,7 +5,7 @@ url: /
 
 # Welcome to Agent Notes
 
-🚀 This is my personal space for exploring the world of building AI agents. 
+🚀 This is my personal space for exploring the world of training AI agents. 
 
 While exploring AI development, I often stumble upon tips and insights from others on platforms like X that I find really useful. This is the place to capture some of these bits of knowledge here, giving credit where it's due, and keep track of what I've learned and to share it with anyone who is curious.
 
@@ -15,4 +15,4 @@ Beyond tutorials, I will be adding other things I come across: little hacks that
 
 Whether you're just starting out or have been at this for a while, I hope what you find here valuable. 🌟
 
-If you want to get in touch you can reach my socials <linkedin icon> <x platform icon>.
+If you would like to get in touch please reach out on socials [Linkedin](https://www.linkedin.com/in/wsjames/) or [X](https://x.com/heylegacyguy).
