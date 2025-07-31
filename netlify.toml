@@ -1,3 +1,3 @@
 [build]
-  command = "git submodule update --init --recursive && quarto render"
-  publish = "docs"
+  command = "curl -L https://quarto.org/download/latest/quarto-linux-amd64.tar.gz | tar -xz && export PATH=$PATH:$PWD/quarto-bin/bin && git submodule update --init --recursive && quarto render"
+  publish = "/opt/build/repo/docs"
