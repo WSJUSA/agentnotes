@@ -1,0 +1,172 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body, p {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  letter-spacing: -0.011em;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+section {
+  margin-top: 54px;
+  margin-bottom: 54px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+/* for use with flatly theme 
+body.quarto-light .nav-link {
+  color: rgb(0,0,0) !important;
+}
+
+.navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+*/
+
+/* Force dark icon for the color scheme toggle in light mode */
+/*
+body.quarto-light .quarto-color-scheme-toggle .bi::before {
+  filter: brightness(0) !important;
+}
+*/
+
+/* Add a medium grey bottom border to the top-level header only */
+#quarto-header {
+  border-bottom: 1.5px solid #adb5bd;
+}
+
+/* Remove header border in dark mode */
+body.quarto-dark #quarto-header,
+[data-bs-theme="dark"] #quarto-header {
+  border-bottom: none !important;
+}
+
+#title-block-header.quarto-title-block.default .quarto-title > .title {
+  margin-bottom: 1.7rem !important; /* match body paragraph spacing */
+}
+#title-block-header.quarto-title-block.default .description {
+  margin-bottom: 1.2em !important;
+}
+#title-block-header.quarto-title-block.default > div > .description {
+  margin-top: 0.7rem !important;
+  display: block;
+}
+
+/* Hide author and published labels and their headings in the Quarto title block, but keep them in the HTML for SEO/LLM purposes */
+#title-block-header.quarto-title-block.default .quarto-title-meta-heading {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px); /* For older browsers */
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Make author and published meta content flow inline */
+#title-block-header.quarto-title-block.default .quarto-title-meta {
+  display: block !important;
+}
+#title-block-header.quarto-title-block.default .quarto-title-meta-contents {
+  display: block !important;
+  font-size: 0.9em;
+}
+#title-block-header.quarto-title-block.default .quarto-title-meta-contents p {
+  display: block !important;
+  margin: 0 0 0 0 !important;
+}
+
+/* Force navbar in dark mode */
+body.quarto-dark .navbar, [data-bs-theme="dark"] .navbar {
+  background-color:rgb(235, 104, 100) !important; /* Example: deep blue/gray */
+  min-height: 56px !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: none !important;
+}
+
+/* Only color body content links, not nav-link/sidebar/TOC links */
+body.quarto-dark main a {
+  color: rgb(235, 104, 100) !important;
+  font-weight: 600 !important;
+}
+
+/* Sidebar/TOC active link in dark mode */
+body.quarto-dark #quarto-margin-sidebar .nav-link.active,
+body.quarto-dark #TOC .nav-link.active {
+  color: rgb(235, 104, 100) !important;
+  font-weight: 600 !important;
+}
+body.quarto-dark #quarto-margin-sidebar .nav-link:hover,
+body.quarto-dark #TOC .nav-link:hover {
+  color: rgb(235, 104, 100) !important;
+  font-weight: 600 !important;
+}
+
+/* Sidebar/TOC active link left border in dark mode */
+body.quarto-dark .sidebar nav[role="doc-toc"] ul > li > a.active,
+body.quarto-dark .sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  border-left: 1.5px solid rgb(235, 104, 100) !important;
+}
+
+/* Custom styles for the navbar logo */
+.navbar-brand img,
+.navbar-brand .navbar-brand-img {
+  height: 63px !important; /* Make logo bigger than default navbar height */
+  width: auto !important;
+  margin-right: 0px !important;
+  vertical-align: middle !important; /* Center vertically with text */
+  max-height: none !important;
+  min-height: 45px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+  padding-bottom: 3px !important;
+  font-size: 16px !important; /* Prevent font-size inheritance */
+  line-height: 1 !important; /* Prevent line-height inheritance */
+}
+
+/* Light mode navbar title */
+.navbar-title {
+  font-size: 28.8px !important;
+  font-weight: 500 !important;
+  font-family: 'Roboto Condensed', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Ensure the navbar brand container can accommodate the larger logo */
+.navbar-brand {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+html body.quarto-dark .navbar-title,
+html [data-bs-theme="dark"] .navbar-title,
+html body.quarto-dark .navbar-brand .navbar-title,
+html [data-bs-theme="dark"] .navbar-brand .navbar-title {
+  font-size: 28.8px !important;
+  font-weight: 500 !important;
+  font-family: 'Roboto Condensed', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+/* Ensure dark mode navbar brand has consistent padding */
+html body.quarto-dark .navbar-brand,
+html [data-bs-theme="dark"] .navbar-brand {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+</style>
