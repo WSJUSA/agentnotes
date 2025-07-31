@@ -1,0 +1,3 @@
+[submodule "projects/dspy"]
+	path = projects/dspy
+	url = https://github.com/WSJUSA/dspy_langwatch_demos.git
