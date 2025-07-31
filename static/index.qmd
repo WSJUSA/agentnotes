@@ -1,0 +1,17 @@
+---
+layout: home
+---
+
+# Welcome to Agent Notes
+
+🚀 This is my personal space for exploring the world of building AI agents. 
+
+While exploring AI development, I often stumble upon tips and insights from others on platforms like X that I find really useful. This is the place to capture some of these bits of knowledge here, giving credit where it's due, and keep track of what I've learned and to share it with anyone who is curious.
+
+To get started, I've written a few tutorials that explain ins and outs of optimizing agents. These are focused on DSPy, and I'm excited to keep adding more content as I learn and grow.
+
+Beyond tutorials, I will be adding other things I come across: little hacks that worked for me or thoughts on training AI agents. Right now, I'm focused on software, but I can imagine this space someday touching on topics like training robotics as I anticipate that will become a growing discipline.
+
+Whether you're just starting out or have been at this for a while, I hope what you find here valuable. 🌟
+
+If you want to get in touch you can reach my socials <linkedin icon> <x platform icon>.

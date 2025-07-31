@@ -1,0 +1,3 @@
+[build]
+  command = "git submodule update --init --recursive && quarto render"
+  publish = "docs"
