@@ -221,6 +221,14 @@ tbody, tfoot, tr, td, th{
   padding: 12px 6px !important;
 }
 
+div.sourceCode {
+  margin-top: 30px !important;
+}
+
+.cell {
+  margin-bottom: 30px !important;
+}
+
 pre.sourceCode {
   background-color: #fffff5 !important;
   border-color: rgb(235, 104, 100) !important;
@@ -230,5 +238,37 @@ pre.sourceCode {
 
 .cell-output code {
   color: #666 !important;
+}
+
+.ansi-escaped-output pre {
+  margin: 0px !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  color: #666 !important;
+}
+
+/* Remove margin from text content inside pre elements */
+.ansi-escaped-output pre * {
+  margin: 0px !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+}
+
+/* Target any inline elements that might have margins */
+.ansi-escaped-output pre span,
+.ansi-escaped-output pre code,
+.ansi-escaped-output pre strong,
+.ansi-escaped-output pre em {
+  margin: 0px !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
+}
+
+/* Remove margins from pseudo-elements */
+.ansi-escaped-output pre::before,
+.ansi-escaped-output pre::after {
+  margin: 0px !important;
+  line-height: 1.4 !important;
+  white-space: normal !important;
 }
 </style>
