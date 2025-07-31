@@ -1,5 +1,6 @@
 ---
 layout: home
+url: /
 ---
 
 # Welcome to Agent Notes

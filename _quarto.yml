@@ -1,18 +1,17 @@
 project:
   type: website
-  output-dir: docs
 
 website:
   title: "Agent Notes"
   navbar:
     logo: assets/images/logo_v1.png
     right:
-      - href: static/index.qmd
+      - href: index.qmd
         text: Now
       - text: Tutorials
         menu:
           - href: projects/dspy/notebooks/copro-tutorial.html
-            text: CORPO
+            text: COPRO
 
 format:
   html:

@@ -1,6 +1,11 @@
 # Quarto
 _site/
 .quarto/
+# Quarto standalone files (prevent individual renders from creating files in source dirs)
+*_files/
+*.html
+!_site/**/*.html
+/.quarto/
 
 # R
 .Rhistory
@@ -74,4 +79,5 @@ Thumbs.db
 .netlify/headers
 .netlify/_redirects
 .netlify/_headers
-# .netlify.toml 
+# .netlify.toml
+
