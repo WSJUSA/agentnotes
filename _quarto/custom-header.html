@@ -195,8 +195,24 @@ footer p {
   background-color: #f8f9fa !important;
 }
 
+/* Dark mode table styles */
+body.quarto-dark .table,
+[data-bs-theme="dark"] .table {
+  border: 1px solid #4a4a4a !important;
+  border-collapse: separate !important;
+  background-color: #4a4a4a !important;
+  color: #f8f9fa !important;
+}
+
+/* Table border color */
 tbody, tfoot, tr, td, th{
   border-color: #f8f9fa !important;
+}
+
+/* Dark mode table border color */
+body.quarto-dark tbody, body.quarto-dark tfoot, body.quarto-dark tr, body.quarto-dark td, body.quarto-dark th,
+[data-bs-theme="dark"] tbody, [data-bs-theme="dark"] tfoot, [data-bs-theme="dark"] tr, [data-bs-theme="dark"] td, [data-bs-theme="dark"] th {
+  border-color: #4a4a4a !important;
 }
 
 /* Table header */
@@ -205,14 +221,34 @@ tbody, tfoot, tr, td, th{
   border-bottom: 2px solid #dee2e6 !important;
 }
 
+/* Dark mode table header */
+body.quarto-dark .table thead,
+[data-bs-theme="dark"] .table thead {
+  background-color: rgb(34, 34, 34) !important;
+  border-bottom: 2px solid #4a4a4a !important;
+}
+
 .table tbody tr.even {
   background-color: #f8f9fa !important;
+}
+
+/* Dark mode table even rows */
+body.quarto-dark .table tbody tr.even,
+[data-bs-theme="dark"] .table tbody tr.even {
+  background-color: rgb(34, 34, 34) !important;
 }
 
 .table tbody tr.odd {
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
 
+/* Dark mode table odd rows */
+body.quarto-dark .table tbody tr.odd,
+[data-bs-theme="dark"] .table tbody tr.odd {
+  background-color: rgb(44, 44, 44) !important;
+}
+
+/* Terminal output styles */
 .cell-output {
   background-color: #f8f9fa !important;
   border-color: #dee2e6 !important;
@@ -220,6 +256,24 @@ tbody, tfoot, tr, td, th{
   border-style: solid !important;
   padding: 12px 6px !important;
 }
+
+/* Dark mode cell-output styles */
+body.quarto-dark .cell-output,
+[data-bs-theme="dark"] .cell-output {
+  background-color: #2d2d2d !important;
+  border-color: #4a4a4a !important;
+}
+
+.cell-output code {
+  color: #666 !important;
+}
+
+/* Dark mode cell-output code styles */
+body.quarto-dark .cell-output code,
+[data-bs-theme="dark"] .cell-output code {
+  color: #adb5bd !important;
+}
+
 
 div.sourceCode {
   margin-top: 30px !important;
@@ -229,15 +283,26 @@ div.sourceCode {
   margin-bottom: 30px !important;
 }
 
-pre.sourceCode {
+.cell-code {
   background-color: #fffff5 !important;
   border-color: rgb(235, 104, 100) !important;
   border-width: 0 1px 0 1px !important;
   border-style: solid !important;
 }
 
-.cell-output code {
-  color: #666 !important;
+/* Dark mode cell-code styles */
+body.quarto-dark .cell-code,
+[data-bs-theme="dark"] .cell-code {
+  background-color: #4a4a4a !important;
+  border-color: rgb(235, 104, 100) !important;
+  border-width: 0 1px 0 1px !important;
+  border-style: solid !important;
+}
+
+/* Dark mode code syntax highlighting - preserve blue for code lines */
+body.quarto-dark pre > code.sourceCode > span,
+[data-bs-theme="dark"] pre > code.sourceCode > span {
+  color: rgb(0, 180, 180) !important;
 }
 
 .ansi-escaped-output pre {
@@ -271,4 +336,5 @@ pre.sourceCode {
   line-height: 1.4 !important;
   white-space: normal !important;
 }
+
 </style>
