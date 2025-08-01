@@ -1,6 +1,0 @@
-[[plugins]]
-  package = "@quarto/netlify-plugin-quarto"
-
-[build]
-  command = "npm install -D @quarto/netlify-plugin-quarto && git submodule update --init --recursive && quarto render"
-  publish = "_site"
