@@ -337,4 +337,153 @@ body.quarto-dark pre > code.sourceCode > span,
   white-space: normal !important;
 }
 
+/* Callout styles */
+div.callout-important.callout {
+  border-left-color: red;
+}
+
+div.callout-important.callout-style-default>.callout-header {
+  background-color: rgb(255, 171, 160)
+}
+
+div.callout-title-container {
+  color:red
+}
+
+i.callout-icon {
+  filter: hue-rotate(0deg) saturate(200%) brightness(100%) contrast(200%) !important;
+}
+
+.callout.callout-style-default .callout-body {
+  background-color: rgb(254, 237, 230)
+}
+
+section .level2, section .level3, section .level4 {
+  margin-top: 2em !important;
+  margin-bottom: 2em !important;
+}
+
+/* Custom CSS for enhanced summary blocks */
+.summary-block {
+  border-left: 4px solid #007acc;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.summary-block h3 {
+  color: #007acc;
+  margin-top: 0;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.summary-meta {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.summary-excerpt {
+  font-style: italic;
+  color: #495057;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 4px;
+}
+
+.read-more-btn {
+  display: inline-block;
+  background: #007acc;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.read-more-btn:hover {
+  background: #0056b3;
+  color: white;
+  text-decoration: none;
+}
+
+.page-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin: 0 0;
+}
+
+/* Reduce spacing between rows in the page card grid */
+.page-card-grid section.page-card {
+  margin-bottom: 0rem !important;
+}
+
+.page-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.page-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Dark mode support for page cards */
+body.quarto-dark .page-card,
+[data-bs-theme="dark"] .page-card {
+  border-color: #495057;
+  background: #212529;
+  color: #e9ecef;
+}
+
+body.quarto-dark .page-card:hover,
+[data-bs-theme="dark"] .page-card:hover {
+  box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+}
+
+/* Dark mode for summary elements inside page cards */
+body.quarto-dark .summary-meta,
+[data-bs-theme="dark"] .summary-meta {
+  color: #adb5bd;
+}
+
+body.quarto-dark .summary-excerpt,
+[data-bs-theme="dark"] .summary-excerpt {
+  color: #ced4da;
+  background: rgba(255,255,255,0.05);
+}
 </style>
+
+<!-- Custom JavaScript for interactive features -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click tracking for tutorial links
+  const tutorialLinks = document.querySelectorAll('a[href*="tutorial"], a[href*="miprov2"]');
+  tutorialLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      // You could add analytics tracking here
+      console.log('Tutorial accessed:', this.href);
+    });
+  });
+  
+  // Add smooth scrolling for anchor links
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  anchorLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+});
+</script>

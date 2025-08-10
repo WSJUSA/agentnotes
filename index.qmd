@@ -3,7 +3,56 @@ layout: home
 url: /
 ---
 
-# Welcome to Agent Notes
+# Latest Posts:
+
+::: {.page-card-grid}
+
+::: {.page-card}
+### DSPy MIPROv2 Configuration Guide
+
+::: {.summary-meta}
+**Latest Update**: Comprehensive guide to understanding and configuring the MIPROv2 optimizer
+:::
+
+::: {.summary-excerpt}
+This tutorial breaks down the 5-step MIPROv2 optimization process, from demo set selection to final program selection. Perfect for engineers who want to understand how to tune MIPROv2 parameters effectively.
+:::
+
+[Read Full Guide →](/projects/dspy/src/miprov2/miprov2_explained.html){.read-more-btn}
+:::
+
+::: {.page-card}
+### DSPy MIPROv2 Parameters Guide
+
+::: {.summary-meta}
+**Reference**: Complete parameter documentation for MIPROv2 optimizer
+:::
+
+::: {.summary-excerpt}
+Comprehensive guide to all MIPROv2 constructor and compile method parameters. Includes detailed descriptions, types, defaults, and usage examples for fine-tuning the optimizer's behavior.
+:::
+
+[View Parameters →](/projects/dspy/src/miprov2/miprov2_properties.html){.read-more-btn}
+:::
+
+::: {.page-card}
+### COPRO Tutorial
+
+::: {.summary-meta}
+**Optimization Method**: Labeled demonstration optimization
+:::
+
+::: {.summary-excerpt}
+Learn about the DSPy COPRO optimizer and how to observe its optimization runs with LangWatch.
+:::
+
+[Read Tutorial →](/projects/dspy/notebooks/copro-tutorial.html){.read-more-btn}
+:::
+
+:::
+
+
+# Welcome to Agent Notes:
 
 🚀 This is my personal space for exploring the world of training AI agents. 
 

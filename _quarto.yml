@@ -11,7 +11,10 @@ website:
       - text: Tutorials
         menu:
           - href: projects/dspy/notebooks/copro-tutorial.html
-            text: COPRO
+            text: COPRO Tutorial
+          - href: projects/dspy/src/miprov2/miprov2_explained.html
+            text: MIPROv2 Explained
+
   page-footer:
     center: "View this website source code on [GitHub](https://github.com/WSJUSA/agentnotes)"
 
@@ -23,8 +26,8 @@ format:
       light: journal
       dark: darkly
 
-
 execute:
   echo: true
   eval: false
   cache: false
+  
