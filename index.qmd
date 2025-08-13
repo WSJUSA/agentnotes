@@ -11,7 +11,7 @@ url: /
 ### DSPy MIPROv2 Configuration Guide
 
 ::: {.summary-meta}
-**Latest Update**: Comprehensive guide to understanding and configuring the MIPROv2 optimizer
+Comprehensive guide to understanding and configuring the MIPROv2 optimizer
 :::
 
 ::: {.summary-excerpt}
@@ -29,7 +29,7 @@ This tutorial breaks down the 5-step MIPROv2 optimization process, from demo set
 :::
 
 ::: {.summary-excerpt}
-Comprehensive guide to all MIPROv2 constructor and compile method parameters. Includes detailed descriptions, types, defaults, and usage examples for fine-tuning the optimizer's behavior.
+Comprehensive reference tables to all MIPROv2 constructor and compile method parameters. Includes detailed descriptions, types, defaults, and usage examples for fine-tuning the optimizer's behavior.
 :::
 
 [View Parameters →](/projects/dspy/src/miprov2/miprov2_properties.html){.read-more-btn}

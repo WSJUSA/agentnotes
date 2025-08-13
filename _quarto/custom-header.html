@@ -305,6 +305,13 @@ body.quarto-dark pre > code.sourceCode > span,
   color: rgb(0, 180, 180) !important;
 }
 
+/* Dark mode inline code background color */
+body.quarto-dark code:not(.sourceCode),
+[data-bs-theme="dark"] code:not(.sourceCode) {
+  background-color: #212529;
+  color: rgb(227, 116, 255);
+}
+
 .ansi-escaped-output pre {
   margin: 0px !important;
   line-height: 1.4 !important;
@@ -356,6 +363,12 @@ i.callout-icon {
 
 .callout.callout-style-default .callout-body {
   background-color: rgb(254, 237, 230)
+}
+
+/* Dark mode callout-important body text color */
+body.quarto-dark .callout-important .callout-body,
+[data-bs-theme="dark"] .callout-important .callout-body {
+  color: #212529;
 }
 
 section .level2, section .level3, section .level4 {
