@@ -473,6 +473,34 @@ body.quarto-dark .summary-excerpt,
   color: #ced4da;
   background: rgba(255,255,255,0.05);
 }
+
+/* Mobile responsive navbar fixes */
+@media (max-width: 767.98px) {
+  /* Hide dark mode toggle and search on mobile to save space */
+  .quarto-color-scheme-toggle,
+  #quarto-search,
+  .quarto-search-toggle,
+  [data-bs-toggle="search"],
+  .navbar-nav .search-toggle,
+  .navbar .search-toggle {
+    display: none !important;
+  }
+}
+
+/* Override Bootstrap's flex order change for quarto-navbar-tools */
+@media (max-width: 991.98px) {
+  .navbar .quarto-navbar-tools {
+    margin-left: auto !important;
+  }
+  
+  .navbar #quarto-search {
+    margin-left: 0.25rem !important;
+  }
+  
+  .navbar-brand-container.mx-auto {
+    max-width: 100% !important;
+  }
+}
 </style>
 
 <!-- Custom JavaScript for interactive features -->
