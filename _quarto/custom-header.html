@@ -1,12 +1,32 @@
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
+/* ===== GLOBAL RETRO RESET ===== */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* ===== TYPOGRAPHY ===== */
 body, p {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   font-size: 16px !important;
   line-height: 1.7 !important;
   letter-spacing: -0.011em;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', monospace !important;
+  font-weight: 400 !important;
+  text-transform: none;
+  letter-spacing: -0.05em;
+  transform: scaleX(0.82);
+  transform-origin: left;
+  line-height: 1.6 !important;
+}
+
+h1 { font-size: 1.7rem !important; }
+h2 { font-size: 1.4rem !important; }
+h3 { font-size: 1.15rem !important; }
+h4 { font-size: 0.95rem !important; }
 
 section {
   margin-top: 54px;
@@ -14,44 +34,48 @@ section {
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 2.2rem !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.05em;
+  line-height: 1.6 !important;
   margin: 0 0 1rem 0;
+  transform: scaleX(0.82);
+  transform-origin: left;
 }
 
-/* for use with flatly theme 
-body.quarto-light .nav-link {
-  color: rgb(0,0,0) !important;
+/* ===== LIGHT MODE ACCENTS ===== */
+main a:not(.nav-link):not(.read-more-btn):not(.navbar-brand) {
+  color: #eb6864 !important;
 }
 
-.navbar {
-  background: transparent !important;
-  box-shadow: none !important;
+#quarto-margin-sidebar .nav-link.active,
+#TOC .nav-link.active {
+  color: #eb6864 !important;
+  font-weight: 600 !important;
 }
-*/
-
-/* Force dark icon for the color scheme toggle in light mode */
-/*
-body.quarto-light .quarto-color-scheme-toggle .bi::before {
-  filter: brightness(0) !important;
+#quarto-margin-sidebar .nav-link:hover,
+#TOC .nav-link:hover {
+  color: #eb6864 !important;
 }
-*/
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
+  border-left: 2px solid #eb6864 !important;
+}
 
-/* Add a medium grey bottom border to the top-level header only */
+/* ===== HEADER BORDER ===== */
 #quarto-header {
-  border-bottom: 1.5px solid #adb5bd;
+  border-bottom: 3px solid #222;
 }
 
-/* Remove header border in dark mode */
 body.quarto-dark #quarto-header,
 [data-bs-theme="dark"] #quarto-header {
-  border-bottom: none !important;
+  border-bottom: 3px solid #eb6864 !important;
 }
 
+/* ===== TITLE BLOCK SPACING ===== */
 #title-block-header.quarto-title-block.default .quarto-title > .title {
-  margin-bottom: 1.7rem !important; /* match body paragraph spacing */
+  margin-bottom: 1.7rem !important;
 }
 #title-block-header.quarto-title-block.default .description {
   margin-bottom: 1.2em !important;
@@ -61,19 +85,34 @@ body.quarto-dark #quarto-header,
   display: block;
 }
 
-/* Hide author and published labels and their headings in the Quarto title block, but keep them in the HTML for SEO/LLM purposes */
+/* Article banner */
+.article-banner {
+  width: 100%;
+  max-width: 1200px;
+  height: 320px;
+  margin: 0 auto 1.5rem auto;
+  overflow: hidden;
+  background: #e9ecef;
+}
+.article-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== META HIDING ===== */
 #title-block-header.quarto-title-block.default .quarto-title-meta-heading {
   position: absolute !important;
   left: -9999px !important;
   width: 1px !important;
   height: 1px !important;
   overflow: hidden !important;
-  clip: rect(1px, 1px, 1px, 1px); /* For older browsers */
+  clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   white-space: nowrap;
 }
 
-/* Make author and published meta content flow inline */
 #title-block-header.quarto-title-block.default .quarto-title-meta {
   display: block !important;
 }
@@ -86,64 +125,55 @@ body.quarto-dark #quarto-header,
   margin: 0 0 0 0 !important;
 }
 
-/* Force navbar in dark mode */
+/* ===== DARK MODE NAVBAR ===== */
 body.quarto-dark .navbar, [data-bs-theme="dark"] .navbar {
-  background-color:rgb(235, 104, 100) !important; /* Example: deep blue/gray */
+  background-color: #0d1117 !important;
   min-height: 56px !important;
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
-  border-bottom: none !important;
+  border-bottom: 3px solid #eb6864 !important;
 }
 
-/* Only color body content links, not nav-link/sidebar/TOC links */
-body.quarto-dark main a {
-  color: rgb(235, 104, 100) !important;
+/* ===== DARK MODE LINKS & TOC ===== */
+body.quarto-dark main a:not(.nav-link):not(.read-more-btn):not(.navbar-brand) {
+  color: #eb6864 !important;
   font-weight: 600 !important;
+  text-shadow: 0 0 8px rgba(235, 104, 100, 0.3);
 }
 
-/* Sidebar/TOC active link in dark mode */
 body.quarto-dark #quarto-margin-sidebar .nav-link.active,
 body.quarto-dark #TOC .nav-link.active {
-  color: rgb(235, 104, 100) !important;
+  color: #eb6864 !important;
   font-weight: 600 !important;
 }
 body.quarto-dark #quarto-margin-sidebar .nav-link:hover,
 body.quarto-dark #TOC .nav-link:hover {
-  color: rgb(235, 104, 100) !important;
+  color: #eb6864 !important;
   font-weight: 600 !important;
 }
 
-/* Sidebar/TOC active link left border in dark mode */
 body.quarto-dark .sidebar nav[role="doc-toc"] ul > li > a.active,
 body.quarto-dark .sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
-  border-left: 1.5px solid rgb(235, 104, 100) !important;
+  border-left: 2px solid #eb6864 !important;
 }
 
-/* Custom styles for the navbar logo */
+/* ===== NAVBAR BRAND / LOGO ===== */
 .navbar-brand img,
 .navbar-brand .navbar-brand-img {
-  height: 63px !important; /* Make logo bigger than default navbar height */
+  height: 63px !important;
   width: auto !important;
   margin-right: 0px !important;
-  vertical-align: middle !important; /* Center vertically with text */
+  vertical-align: middle !important;
   max-height: none !important;
   min-height: 45px !important;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
   padding: 0px !important;
   padding-bottom: 3px !important;
-  font-size: 16px !important; /* Prevent font-size inheritance */
-  line-height: 1 !important; /* Prevent line-height inheritance */
+  font-size: 16px !important;
+  line-height: 1 !important;
 }
 
-/* Light mode navbar title */
-.navbar-title {
-  font-size: 28.8px !important;
-  font-weight: 500 !important;
-  font-family: 'Roboto Condensed', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-}
-
-/* Ensure the navbar brand container can accommodate the larger logo */
 .navbar-brand {
   display: flex !important;
   align-items: center !important;
@@ -152,42 +182,117 @@ body.quarto-dark .sidebar nav[role="doc-toc"] ul > li > ul > li > a.active {
   padding-bottom: 0px !important;
 }
 
+/* ===== NAVBAR TITLE ===== */
+html body .navbar-brand .navbar-title,
+html body.quarto-light .navbar-brand .navbar-title {
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em;
+  color: white !important;
+  word-spacing: -0.3em;
+}
+
+.navbar-title::after {
+  content: '_';
+  animation: blink-cursor 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 html body.quarto-dark .navbar-title,
 html [data-bs-theme="dark"] .navbar-title,
 html body.quarto-dark .navbar-brand .navbar-title,
 html [data-bs-theme="dark"] .navbar-brand .navbar-title {
-  font-size: 28.8px !important;
-  font-weight: 500 !important;
-  font-family: 'Roboto Condensed', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  color: #eb6864 !important;
+  text-shadow: 0 0 10px rgba(235, 104, 100, 0.5);
   transform: none !important;
   scale: 1 !important;
 }
 
-/* Ensure dark mode navbar brand has consistent padding */
 html body.quarto-dark .navbar-brand,
 html [data-bs-theme="dark"] .navbar-brand {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
 
-/* Footer paragraph font size */
-footer p {
-  font-size: 14px !important;
-  line-height: 1.4 !important;
+/* ===== NAV LINKS ===== */
+.navbar .nav-link {
+  font-family: 'Space Mono', monospace !important;
+  text-transform: uppercase;
+  font-size: 12px !important;
+  letter-spacing: 0.05em;
 }
 
-/* Footer paragraph font size */
-footer p {
-  font-size: 14px !important;
-  line-height: 1.4 !important;
+body.quarto-dark .navbar .nav-link {
+  color: #8b949e !important;
+}
+body.quarto-dark .navbar .nav-link:hover {
+  color: #eb6864 !important;
+  text-shadow: 0 0 8px rgba(235, 104, 100, 0.4);
 }
 
-/* Table Styles */
+/* ===== DROPDOWN MENUS ===== */
+body.quarto-dark .dropdown-menu,
+[data-bs-theme="dark"] .dropdown-menu {
+  background-color: #161b22 !important;
+  border: 2px solid #eb6864 !important;
+}
+
+body.quarto-dark .dropdown-item,
+[data-bs-theme="dark"] .dropdown-item {
+  color: #c9d1d9 !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 12px !important;
+}
+body.quarto-dark .dropdown-item:hover,
+[data-bs-theme="dark"] .dropdown-item:hover {
+  background-color: rgba(235, 104, 100, 0.1) !important;
+  color: #eb6864 !important;
+}
+
+.dropdown-menu {
+  border: 2px solid #333 !important;
+}
+.dropdown-item {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 12px !important;
+}
+.dropdown-item:hover {
+  background-color: rgba(235, 104, 100, 0.1) !important;
+  color: #eb6864 !important;
+}
+
+/* ===== SIDEBAR / TOC ===== */
+#TOC #toc-title {
+  font-size: 0.9rem !important;
+}
+
+.sidebar .nav-link,
+#TOC .nav-link {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 13px !important;
+}
+
+/* ===== FOOTER ===== */
+footer p {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+}
+
+/* ===== TABLE STYLES [PRESERVED] ===== */
 .table {
   font-size: 15px !important;
   line-height: 1.6 !important;
   margin: 1.5rem 0 !important;
-  border-radius: 0px !important;
   overflow: hidden !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid #adb5bd !important;
@@ -195,7 +300,6 @@ footer p {
   background-color: #f8f9fa !important;
 }
 
-/* Dark mode table styles */
 body.quarto-dark .table,
 [data-bs-theme="dark"] .table {
   border: 1px solid #4a4a4a !important;
@@ -204,24 +308,20 @@ body.quarto-dark .table,
   color: #f8f9fa !important;
 }
 
-/* Table border color */
-tbody, tfoot, tr, td, th{
+tbody, tfoot, tr, td, th {
   border-color: #f8f9fa !important;
 }
 
-/* Dark mode table border color */
 body.quarto-dark tbody, body.quarto-dark tfoot, body.quarto-dark tr, body.quarto-dark td, body.quarto-dark th,
 [data-bs-theme="dark"] tbody, [data-bs-theme="dark"] tfoot, [data-bs-theme="dark"] tr, [data-bs-theme="dark"] td, [data-bs-theme="dark"] th {
   border-color: #4a4a4a !important;
 }
 
-/* Table header */
 .table thead {
   background-color: #f8f9fa !important;
   border-bottom: 2px solid #dee2e6 !important;
 }
 
-/* Dark mode table header */
 body.quarto-dark .table thead,
 [data-bs-theme="dark"] .table thead {
   background-color: rgb(34, 34, 34) !important;
@@ -232,7 +332,6 @@ body.quarto-dark .table thead,
   background-color: #f8f9fa !important;
 }
 
-/* Dark mode table even rows */
 body.quarto-dark .table tbody tr.even,
 [data-bs-theme="dark"] .table tbody tr.even {
   background-color: rgb(34, 34, 34) !important;
@@ -242,13 +341,12 @@ body.quarto-dark .table tbody tr.even,
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Dark mode table odd rows */
 body.quarto-dark .table tbody tr.odd,
 [data-bs-theme="dark"] .table tbody tr.odd {
   background-color: rgb(44, 44, 44) !important;
 }
 
-/* Terminal output styles */
+/* ===== CELL OUTPUT STYLES [PRESERVED] ===== */
 .cell-output {
   background-color: #f8f9fa !important;
   border-color: #dee2e6 !important;
@@ -257,7 +355,6 @@ body.quarto-dark .table tbody tr.odd,
   padding: 12px 6px !important;
 }
 
-/* Dark mode cell-output styles */
 body.quarto-dark .cell-output,
 [data-bs-theme="dark"] .cell-output {
   background-color: #2d2d2d !important;
@@ -268,12 +365,10 @@ body.quarto-dark .cell-output,
   color: #666 !important;
 }
 
-/* Dark mode cell-output code styles */
 body.quarto-dark .cell-output code,
 [data-bs-theme="dark"] .cell-output code {
   color: #adb5bd !important;
 }
-
 
 div.sourceCode {
   margin-top: 30px !important;
@@ -283,35 +378,35 @@ div.sourceCode {
   margin-bottom: 30px !important;
 }
 
+/* ===== CODE BLOCKS — backgrounds preserved, borders updated ===== */
 .cell-code {
   background-color: #fffff5 !important;
-  border-color: rgb(235, 104, 100) !important;
-  border-width: 0 1px 0 1px !important;
+  border-color: #eb6864 !important;
+  border-width: 0 2px 0 2px !important;
   border-style: solid !important;
 }
 
-/* Dark mode cell-code styles */
 body.quarto-dark .cell-code,
 [data-bs-theme="dark"] .cell-code {
   background-color: #4a4a4a !important;
-  border-color: rgb(235, 104, 100) !important;
-  border-width: 0 1px 0 1px !important;
+  border-color: #eb6864 !important;
+  border-width: 0 2px 0 2px !important;
   border-style: solid !important;
 }
 
-/* Dark mode code syntax highlighting - preserve blue for code lines */
+/* ===== DARK MODE CODE SYNTAX [PRESERVED] ===== */
 body.quarto-dark pre > code.sourceCode > span,
 [data-bs-theme="dark"] pre > code.sourceCode > span {
   color: rgb(0, 180, 180) !important;
 }
 
-/* Dark mode inline code background color */
 body.quarto-dark code:not(.sourceCode),
 [data-bs-theme="dark"] code:not(.sourceCode) {
   background-color: #212529;
   color: rgb(227, 116, 255);
 }
 
+/* ===== ANSI OUTPUT STYLES [PRESERVED] ===== */
 .ansi-escaped-output pre {
   margin: 0px !important;
   line-height: 1.4 !important;
@@ -319,14 +414,12 @@ body.quarto-dark code:not(.sourceCode),
   color: #666 !important;
 }
 
-/* Remove margin from text content inside pre elements */
 .ansi-escaped-output pre * {
   margin: 0px !important;
   line-height: 1.4 !important;
   white-space: normal !important;
 }
 
-/* Target any inline elements that might have margins */
 .ansi-escaped-output pre span,
 .ansi-escaped-output pre code,
 .ansi-escaped-output pre strong,
@@ -336,7 +429,6 @@ body.quarto-dark code:not(.sourceCode),
   white-space: normal !important;
 }
 
-/* Remove margins from pseudo-elements */
 .ansi-escaped-output pre::before,
 .ansi-escaped-output pre::after {
   margin: 0px !important;
@@ -344,7 +436,7 @@ body.quarto-dark code:not(.sourceCode),
   white-space: normal !important;
 }
 
-/* Callout styles */
+/* ===== CALLOUT STYLES [PRESERVED] ===== */
 div.callout-important.callout {
   border-left-color: red;
 }
@@ -365,36 +457,35 @@ i.callout-icon {
   background-color: rgb(254, 237, 230)
 }
 
-/* Dark mode callout-important body text color */
 body.quarto-dark .callout-important .callout-body,
 [data-bs-theme="dark"] .callout-important .callout-body {
   color: #212529;
 }
 
+/* ===== SECTION SPACING [PRESERVED] ===== */
 section .level2, section .level3, section .level4 {
   margin-top: 2em !important;
   margin-bottom: 2em !important;
 }
 
-/* Custom CSS for enhanced summary blocks */
+/* ===== SUMMARY BLOCKS ===== */
 .summary-block {
-  border-left: 4px solid #007acc;
+  border-left: 4px solid #eb6864;
   padding: 1rem;
   margin: 1.5rem 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #f8f9fa;
+  box-shadow: 4px 4px 0 0 rgba(0,0,0,0.15);
 }
 
 .summary-block h3 {
-  color: #007acc;
+  color: #eb6864;
   margin-top: 0;
   border-bottom: 2px solid #dee2e6;
   padding-bottom: 0.5rem;
 }
 
 .summary-meta {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #6c757d;
   margin-bottom: 1rem;
 }
@@ -405,25 +496,57 @@ section .level2, section .level3, section .level4 {
   margin: 1rem 0;
   padding: 0.5rem;
   background: rgba(255,255,255,0.7);
-  border-radius: 4px;
 }
 
 .read-more-btn {
   display: inline-block;
-  background: #007acc;
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  background: #eb6864;
+  color: white !important;
+  padding: 0.6rem 1.2rem;
+  text-decoration: none !important;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 0.55rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid #eb6864;
+  transition: all 0.15s;
 }
 
 .read-more-btn:hover {
-  background: #0056b3;
-  color: white;
-  text-decoration: none;
+  background: transparent;
+  color: #eb6864 !important;
+  text-decoration: none !important;
+  box-shadow: 4px 4px 0 0 #eb6864;
+  transform: translate(-2px, -2px);
 }
 
+body.quarto-dark .summary-block,
+[data-bs-theme="dark"] .summary-block {
+  background: #161b22;
+  border-left-color: #eb6864;
+  box-shadow: 4px 4px 0 0 rgba(235, 104, 100, 0.15);
+}
+
+body.quarto-dark .summary-block h3,
+[data-bs-theme="dark"] .summary-block h3 {
+  color: #eb6864;
+  border-bottom-color: #30363d;
+}
+
+body.quarto-dark .read-more-btn,
+[data-bs-theme="dark"] .read-more-btn {
+  background: #eb6864;
+  color: #0d1117 !important;
+  border-color: #eb6864;
+}
+body.quarto-dark .read-more-btn:hover,
+[data-bs-theme="dark"] .read-more-btn:hover {
+  background: transparent;
+  color: #eb6864 !important;
+  box-shadow: 0 0 15px rgba(235, 104, 100, 0.3), 4px 4px 0 0 #eb6864;
+}
+
+/* ===== PAGE CARDS ===== */
 .page-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -431,52 +554,61 @@ section .level2, section .level3, section .level4 {
   margin: 0 0;
 }
 
-/* Reduce spacing between rows in the page card grid */
 .page-card-grid section.page-card {
   margin-bottom: 0rem !important;
 }
 
 .page-card {
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
+  border: 2px solid #333;
   padding: 1.5rem;
   background: white;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.15s;
+  box-shadow: 4px 4px 0 0 #333;
+}
+
+.page-card h2,
+.page-card h3 {
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 1.4rem !important;
+  line-height: 1.6 !important;
+  text-transform: none;
+  transform: scaleX(0.82);
+  transform-origin: left;
 }
 
 .page-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 #eb6864;
+  border-color: #eb6864;
 }
 
-/* Dark mode support for page cards */
 body.quarto-dark .page-card,
 [data-bs-theme="dark"] .page-card {
-  border-color: #495057;
-  background: #212529;
+  border: 2px solid #30363d;
+  background: #0d1117;
   color: #e9ecef;
+  box-shadow: 4px 4px 0 0 #30363d;
 }
 
 body.quarto-dark .page-card:hover,
 [data-bs-theme="dark"] .page-card:hover {
-  box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+  border-color: #eb6864;
+  box-shadow: 0 0 15px rgba(235, 104, 100, 0.15), 4px 4px 0 0 #eb6864;
 }
 
-/* Dark mode for summary elements inside page cards */
 body.quarto-dark .summary-meta,
 [data-bs-theme="dark"] .summary-meta {
-  color: #adb5bd;
+  color: #8b949e;
 }
 
 body.quarto-dark .summary-excerpt,
 [data-bs-theme="dark"] .summary-excerpt {
-  color: #ced4da;
-  background: rgba(255,255,255,0.05);
+  color: #c9d1d9;
+  background: rgba(255,255,255,0.03);
 }
 
-/* Mobile responsive navbar fixes */
+/* ===== MOBILE RESPONSIVE [PRESERVED] ===== */
 @media (max-width: 767.98px) {
-  /* Hide dark mode toggle and search on mobile to save space */
   .quarto-color-scheme-toggle,
   #quarto-search,
   .quarto-search-toggle,
@@ -487,7 +619,6 @@ body.quarto-dark .summary-excerpt,
   }
 }
 
-/* Override Bootstrap's flex order change for quarto-navbar-tools */
 @media (max-width: 991.98px) {
   .navbar .quarto-navbar-tools {
     margin-left: auto !important;
@@ -501,6 +632,36 @@ body.quarto-dark .summary-excerpt,
     max-width: 100% !important;
   }
 }
+
+/* ===== RETRO EFFECTS ===== */
+
+/* Subtle CRT scanlines — dark mode only */
+body.quarto-dark::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Green phosphor glow on dark mode headings */
+body.quarto-dark h1,
+body.quarto-dark h2,
+body.quarto-dark h3,
+body.quarto-dark .title {
+  color: #e6edf3 !important;
+  text-shadow: 0 0 1px rgba(235, 104, 100, 0.15);
+}
 </style>
 
 <!-- Custom JavaScript for interactive features -->
@@ -510,7 +671,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const tutorialLinks = document.querySelectorAll('a[href*="tutorial"], a[href*="miprov2"]');
   tutorialLinks.forEach(link => {
     link.addEventListener('click', function() {
-      // You could add analytics tracking here
       console.log('Tutorial accessed:', this.href);
     });
   });
