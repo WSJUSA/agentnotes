@@ -36,7 +36,7 @@ This tutorial breaks down the 5-step MIPROv2 optimization process, from demo set
 :::
 
 ::: {.page-card}
-### DSPy MIPROv2 Parameters Guide
+## DSPy MIPROv2 Parameters Guide
 
 ::: {.summary-meta}
 **Reference**: Complete parameter documentation for MIPROv2 optimizer
@@ -50,7 +50,7 @@ Comprehensive reference tables to all MIPROv2 constructor and compile method par
 :::
 
 ::: {.page-card}
-### COPRO Tutorial
+## COPRO Tutorial
 
 ::: {.summary-meta}
 **Optimization Method**: Labeled demonstration optimization
