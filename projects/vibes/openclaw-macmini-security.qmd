@@ -1,0 +1,450 @@
+---
+title: "Easy Security for OpenClaw on a Mac Mini"
+author: "Will James"
+date: last-modified
+description: "Setup OpenClaw on a Mac Mini with good enough security that doesn't decapitate your agent."
+---
+
+::: {.article-banner}
+![OpenClaw Mac Mini hardening](../../assets/images/openclaw_hardening_banner.jpg)
+:::
+
+# The Step by Step Guide You Have Been Looking For
+
+This guide is for you if you want to run OpenClaw on a Mac Mini with security that will protect the Mac from outside attack and OpenClaw itself, without decapitating the magic ability of OpenClaw to run autonomously. What this guide does differently than many other guides I reviewed before deciding to write my own are:
+
+1. Keep it simple to important security configurations
+2. Provide precise detailed steps for configurations and commands that need to be run.
+
+A lot of guides say to install xyz or configure some setting - but leave out the *HOW*.  This guide gives you every detail while keeping things as simple as possible.
+
+Here are the steps you will go through:
+
+## Key steps (overview)
+
+- [**1. Getting Ready**](#getting-ready) Get a computer and setup some email accounts
+- [**2. Setting up Mac Mini Users**](#setting-up-mac-mini-users) Create admin and non-admin accounts on the Mac Mini
+- [**3. Dependency Installs**](#install-dependency-homebrew-npm-setup) Install homebrew
+- [**4. Remote Access your Mac Mini**](#remote-access-your-mac-mini) Setup Mac basic firewall, sharing, and SSH settings
+- [**5. Setup Tailscale**](#setup-tailscale) Set up Tailscale for hardening remote access to the Mac
+- [**6. Install OpenClaw**](#install-openclaw) Install OpenClaw
+- [**7. Move OpenClaw secrets out of openclaw.json**](#move-openclaw-secrets-from-openclaw.json-to-.env) Move keys to .env
+
+## 1. Getting Ready
+
+- [ ] **Procure a dedicated Mac Mini** only for OpenClaw — not your main Mac or any machine with sensitive personal or company data.
+- [ ] **Create a dedicated Gmail/Google account for Mac Administration** to use when creating the device Apple ID and admin users on the Mac Mini (you need this before creating the Apple ID).
+- [ ] **Create a separate Gmail account for the OpenClaw agent** this is for any purposes OpenClaw needs a gmail account. We separate OpenClaw from the Mac Mini admin.
+
+## 2. Setting up Mac Mini Users
+
+Plugin and startup your Mac Mini and start following the setup.  Youre going to use the first gmail account for the admin users to do the initial setup of the device.
+
+- [ ] **Set up an Apple ID that is only for the OpenClaw device**, using the dedicated Gmail account. *This avoids accidental syncing of iCloud, Messages, Photos, or other data from your personal or other-purpose Apple ID.*
+- [ ] **Complete normal macOS setup to create the admin account** on the Mac Mini (this becomes your `<macmini-admin-user>` for installs, Remote Management, SSH setup, etc.).  This user will need a different password than the Apple ID account password.
+- [ ] **Create a non-admin user** on the Mac Mini. This user is for installing and running OpenClaw so the agent has no admin rights on the device.  You do NOT need to associate this user with an Apple ID.  This should absolutely have a different password than your admin user.
+
+## 3. Install Dependency: Homebrew & npm setup
+
+Execute these steps as the Mac Mini **admin user**.
+
+This is some software you will need to install OpenClaw. It is also referenced in configuring the Mac Mini Firewall, so we should install it early to make other settings easier to complete in single steps.
+
+Open up the Terminal application and start running these commands:
+
+- [ ] Install Homebrew and set a path to it
+
+```bash
+# Install Homebrew (follow post-install steps to add brew to PATH if prompted)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node (for firewall allow list and npm — provides /opt/homebrew/bin/node)
+brew install node
+
+# Create a directory for user-local global packages
+mkdir ~/.npm-global
+
+# Configure npm to use this prefix (for all future -g installs)
+npm config set prefix '~/.npm-global'
+
+# Add the bin path to the admin user's shell PATH (zsh is default on macOS)
+echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+### Repeat the following configurations as the **non-admin user**
+
+Log in as the non-admin user and run:
+
+- [ ] **Add Homebrew’s bin to PATH** Run the following in Terminal. Confirm with `which node` and `which npm` when done.
+
+  ```bash
+  # Add Homebrew's bin to PATH (so the non-admin can run node and npm)
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+  source ~/.zshrc
+
+  # Create a directory for user-local global packages
+  mkdir ~/.npm-global
+
+  # Configure npm to use this prefix (for all future -g installs)
+  npm config set prefix '~/.npm-global'
+
+  # Add the npm global bin path to non-admin user's shell PATH
+  echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.zshrc
+  source ~/.zshrc
+  ```
+
+## 4. Remote Access your Mac Mini
+
+Execute these steps as the Mac Mini **admin user**.
+
+In this section you will configure the Mac Mini firewall and sharing settings to allow only the minimum required remote access.
+
+### Firewall Configuration
+
+Go to System Settings > Network > Firewall
+
+- [ ] **Firewall:** On
+
+Go to System Settings → Network → Firewall → Options
+
+- [ ] **Block all incoming connections:** Off (unchecked - this is overly restrictive)
+
+**Allow incoming connections**
+
+- [ ] Control Center
+- [ ] sshd-keygen-wrapper
+- [ ] sshd-session
+
+Do **NOT** allow other apps/services (e.g. cupsd, smbd, python3) unless you need them — set any that appear to **Block** or remove them.
+
+- [ ] Add "node" for remote access to the openclaw gateway.
+
+Node does not appear by default, it is a command-line binary (not a .app), so it must be added manually:
+
+1. In Firewall Options, click **+** (opens file browser).
+2. Press **Command + Shift + G** (Go to Folder).
+3. Enter: `/opt/homebrew/bin/node` (standard Homebrew path on Apple Silicon; run `which node` as the non-admin user to confirm).
+4. Select **node** → Open/Add, then set it to **Allow incoming connections**.
+
+Result: Node processes (e.g. OpenClaw gateway on port 18789) can accept incoming connections when bound to an interface. Prefer binding servers to `127.0.0.1` or the Tailscale IP in config, and use Tailscale/pf for access control.
+
+#### Additional Firewall Settings
+
+- [ ] **Automatically allow built-in software to receive incoming connections:** On
+- [ ] **Automatically allow downloaded signed software to receive incoming connections:** On
+- [ ] **Enable stealth mode:** On (recommended — hides the Mac from network probes)
+
+### Sharing Configurations
+
+Go to System Settings > General > Sharing
+
+#### Remote Management and Screen Sharing
+
+Remote Management provides screen sharing over VNC (port 5900); the **Screen Sharing** toggle in Sharing is intentionally left **off** — Remote Management passes along the rights and controls access.
+
+- [ ] **Enable Remote Management**
+- [ ] **Add the admin user** to Remote Management permissions (select user → Options) — enable **Observe**, **Control**, and **Show when being observed** as needed for access.
+- [ ] **Add the non-admin user** (e.g. `openclaw`) to Remote Management permissions — enable **Observe**, **Control**, and **Show when being observed** as needed for access.  The non-admin will still only be allowed their permissions, but admin tasks can be executed during the session with on the fly entry of admin credentials; this is a convenience.
+
+#### Remote Login (SSH)
+
+Go to System Settings → General → Sharing → Remote Login
+
+- [ ] **Enable Remote Login**. This adds `sshd-keygen-wrapper` or `sshd` to the firewall (or prompts you). Set to **Allow incoming connections**.
+
+**Restrict SSH to key-based auth**
+
+I am using password based ssh access because I use multiple computers around the house and dont want to manage so much key distribution. Key setup is more complexity. I would suggest getting basic password signin working and then add key auth if you really want it.
+
+**Other apps**
+
+- [ ] **Turn off unneeded services**: file sharing (SMB/AFP), AirPlay receiver, printer sharing. Leave **Screen Sharing** off — Remote Management handles it (see above). Remote Login (SSH) is enabled above for Tailscale-only access.
+
+## 5. Setup Tailscale
+
+We will use Tailscale to further lock down access to the Mac Mini. This part will take you through getting it setup on the Mac and any remote machine you use to access the Mac.
+
+Execute these steps as the Mac Mini **admin user**.
+
+### Install Tailscale on the Mac Mini
+
+- [ ] **Download** the Tailscale app from [tailscale.com/download](https://tailscale.com/download) (choose the macOS version standalone .pkg — do NOT use the Apple App Store version).
+- [ ] **Run the installer** (.pkg) and follow the prompts.
+- [ ] **Open the Tailscale app** (Applications → Tailscale; it may launch automatically after install).
+- [ ] **Sign in:** On first launch with your Mac Mini admin user gmail account, click **Sign In** or **Log in to Tailscale** in the app window. Your browser opens to https://login.tailscale.com.
+- [ ] **Add your machine** - add the Mac Mini machine to the network.
+- [ ] **Confirm:** The app shows "Connected" and your device name.
+
+The Mac Mini is added to your tailnet automatically; no separate "add device" step is needed.
+
+### Install Tailscale on your remote machine
+
+- [ ] **Download** the correct installer for your remote access computer from [tailscale.com/download](https://tailscale.com/download).
+- [ ] **Run the installer** and accept defaults.
+- [ ] **Find the Tailscale icon** (in the system tray bottom-right if on Windows).
+- [ ] **Log in:** Right-click the Tailscale tray icon → **Log in…** Again sign in with the Mac Mini admin user gmail account.
+- [ ] **Add your machine** - add the remote machine to the network.
+- [ ] **Confirm:** The tray icon shows "Connected" (green/checkmark).
+
+The remote machine is now on the same tailnet.
+
+### Verify both devices are online (MagicDNS)
+
+- [ ] **Check the admin console:** In a browser go to https://login.tailscale.com/admin/machines. Both the Mac Mini and Remote Machine should appear with Tailscale IPs (100.x.x.x) and status **Online**. MagicDNS names (e.g. `mac-mini`, `windows-pc`) appear here - you can also customize them if you like.
+
+### Configure access control (ACLs + tagging)
+
+Use the Tailscale admin console to lock down who can reach the Mac Mini. Ensure **Remote Login** is enabled on the Mac Mini (System Settings → General → Sharing → Remote Login) before testing.
+
+- [ ] **Open Access control:** In a browser go to https://login.tailscale.com/admin/acl. Use the **Visual editor** (or **JSON** if you prefer editing the policy file).
+
+**Create / confirm the tag and owner** (Access control → **Tags** sub-tab):
+
+- [ ] **Add rule**
+  - **Tag:** `tag:openclaw-one-host`
+  - **Owners:** `autogroup:admin`
+  - *Note: "Only admin can assign this tag."*
+- [ ] **Save.**
+
+**Assign the tag to the Mac Mini** (Machines tab):
+
+Find the Mac Mini at https://login.tailscale.com/admin/machines
+
+- [ ] Find **<macmini-computer-name>** (your Mac Mini) → **three-dot menu** → **Edit tags** → Add **tag:openclaw-one-host**.
+- [ ] Confirm the ownership change warning → **Save.** The device will briefly reconnect; ownership shifts to the tag.
+
+**Create / confirm these two rules in General access rules:**
+
+- [ ] **Self-access rule**
+  - **Source:** `autogroup:member`
+  - **Destination:** `autogroup:self`
+  - **Ports:** `*`
+  - *Note: "Allow members to access their own devices."*
+
+- [ ] **Admin access to Mac Mini only**
+  - **Source:** `autogroup:admin`
+  - **Destination:** `tag:openclaw-one-host`
+  - **Ports:** `tcp:22`, `tcp:5900` (add more as needed, one per line)
+  - *Note: "Admin access to OpenClaw host only."*
+
+- [ ] **Remove the default broad rule:** Find the rule **src: \* → dst: \* → ip: \*** (often labeled "Allow all connections..."). In the visual editor, **delete** it.
+
+### Test SSH and Remote Management over Tailscale
+
+**Test from your remote machine:**
+
+- [ ] **Admin SSH:** `ssh <macmini-admin-user>@<macmini-computer-name>` — should succeed (the remote machine has access to `tag:openclaw-one-host`).
+- [ ] **Non-admin SSH:** `ssh <openclaw-user>@<macmini-computer-name>` — should succeed because the machine is credentialed to the tailscale network.
+- [ ] **Admin screen share:** Screen sharing to **<macmini-computer-name>:5900** (MagicDNS) or <Tailscale-IP>:5900 and login with admin name and password.
+- [ ] **Non-admin screen share:** Screen sharing to **<macmini-computer-name>:5900** (MagicDNS) or <Tailscale-IP>:5900 and login with non-admin name and password.
+
+
+### Block LAN SSH/VNC using pf (Tailscale-only)
+
+Execute these steps as the Mac Mini **admin user**.
+
+We are going to further lock down SSH and Remote Management access to the Mac Mini to make full use of Tailscale access control. These configurations blocks direct access from the local LAN (192.168.x.x) but allows SSH over Tailscale (MagicDNS or Tailscale IP).
+
+**Goal**:
+- Remote Login = ON (sshd must run for Tailscale SSH forwarding)
+- Direct LAN (192.168.x.x) SSH (port 22) and Remote Management (port 5900) blocked
+- Tailscale SSH and Remote Management allowed
+
+**Prerequisites**
+- Remote Login is already ON in System Settings > General > Sharing
+
+**Step-by-Step Commands** (run as admin user — `<macmini-admin-user>`)
+
+1. **Create the custom pf rules file** (blocks LAN, allows Tailscale):
+
+   Edit the file `/etc/pf.tailscale-ssh.conf`
+
+   Paste exactly:
+   ```bash
+   # Block incoming SSH (22) and VNC (5900) from local LAN on Wi-Fi/Ethernet interfaces
+   block in on { en0 en1 } proto tcp to any port { 22 5900 }
+
+   # Allow SSH and VNC from Tailscale range on Tailscale interface
+   pass in on utun* proto tcp from 100.64.0.0/10 to any port { 22 5900 }
+   ```
+
+2. **Set correct permissions on the file**:
+
+   ```bash
+   sudo chown root:wheel /etc/pf.tailscale-ssh.conf
+   sudo chmod 644 /etc/pf.tailscale-ssh.conf
+   ```
+
+3. **Make pf load this file on boot** (add include to main config):
+
+   Edit the file `/etc/pf.conf`
+
+   Add this line at the end:
+   ```bash
+   include "/etc/pf.tailscale-ssh.conf"
+   ```
+
+4. **Load and enable the rules now** (applies immediately):
+
+   ```bash
+   sudo pfctl -e -f /etc/pf.conf
+   ```
+
+5. **Verify the rules are loaded**:
+
+   ```bash
+   sudo pfctl -sr
+   ```
+   - You should see the block and pass lines for port 22 and 5900.
+
+6. **Test paths**:
+
+   ```bash
+   # Tailscale SSH (should work)
+   ssh <openclaw-user>@<macmini-computer-name>
+   # or
+   ssh <openclaw-user>@<tailscale-ip>
+
+   # Local LAN SSH (should fail — expected: connection timed out or refused)
+   ssh <openclaw-user>@192.168.x.x
+   ```
+
+7. **Reboot and re-verify** (confirms persistence):
+   Reboot the Mac Mini, then run:
+   ```bash
+   sudo pfctl -sr
+   ```
+   - Rules should still be loaded.
+   - Retest both SSH paths.
+
+### Undo / Disable if Needed
+
+  ```bash
+  #Disable pf completely (temporary):
+  sudo pfctl -d
+
+  #Remove permanent include (edit /etc/pf.conf and delete the line, then reload):
+  sudo pfctl -f /etc/pf.conf
+  ```
+
+This is the **standard, built-in** way to restrict SSH to Tailscale on macOS without third-party tools or disabling Remote Login.
+
+### Disable Screen Lock
+
+Once you have all the remote access setup, if you plan to run the Mac Mini headless (no monitor/keyboard/mouse attached), turn off the GUI lock/sleep behavior so the Mac Mini doesn't lock you out of screen share by invoking sleep.
+
+- [ ] **Configure Lock Screen settings:**
+  - Start screen saver when inactive: **Never**
+  - Turn display off when inactive: **Never**
+  - Require password after screen saver begins or display is turned off: **Never**
+
+### Access OpenClaw Gateway via SSH tunnel
+
+In the next step you will install OpenClaw and its gateway. With remote accesa available you can access the OpenClaw gateway remotely using an SSH tunnel. Try this out after you complete OpenClaw install:
+
+- [ ] **Create an SSH tunnel** from your local machine to the Mac Mini:
+  ```bash
+  ssh -N -L 18789:127.0.0.1:18789 <openclaw-user>@<macmini-computer-name>
+  ```
+- [ ] **Access the gateway** in your local browser at:
+  ```
+  http://127.0.0.1:18789/?token=<gateway token>
+  ```
+  Replace `<gateway token>` with your actual OpenClaw gateway token.
+
+**Note:** You must keep the SSH tunnel session running while accessing the gateway.
+
+## 6. Install OpenClaw
+
+Execute these steps as the Mac Mini **OpenClaw non-admin user**.
+
+### Handling installation permissions for non-admin users
+
+When running the OpenClaw installer as a **non-admin user** on macOS with Homebrew (typically installed by an admin),
+the script can fail during the global npm install phase with errors like "npm install failed;
+cleaning up and retrying..." or **EACCES (permission denied)** — npm writes to system directories
+(e.g. `/opt/homebrew/lib/node_modules`) owned by the admin, and `openclaw --version` may show "command not found."
+This is a standard macOS/npm quirk, not an OpenClaw bug. The **admin user** must complete **section 3 (Homebrew & npm setup)** first so the non-admin user has a user-local global prefix (`~/.npm-global`) and `openclaw` is available in PATH.
+
+### Run the installer
+
+- [ ] **Run the OpenClaw installer:**
+  ```bash
+  curl -fsSL https://openclaw.ai/install.sh | bash
+  ```
+- [ ] **Verify the installation:** `openclaw --version` (e.g. 2026.2.6-3), then `openclaw doctor` and complete onboarding if prompted.
+- [ ] **Run the OpenClaw onboarding**
+  This will be the full onboarding experience and its a good time to setup a telegram bot.  There are lots of instructions for this around so it is out of scope of this article. The important thing is that this step will create both the `~/.openclaw/openclaw.json` config file for openclaw, and when you start openclaw it will create the auto launcher at `~/Library/LaunchAgents/ai.openclaw.gateway.plist`.  We will edit these files in following steps, so we need their setup completed.
+
+
+### Update OpenClaw configs (recommended)
+
+- [ ] Harden the OpenClaw gateway behavior (especially when accessing via Tailscale/localhost):
+```bash
+openclaw config set gateway.tailscale.mode serve
+openclaw config set gateway.trustedProxies '["127.0.0.1", "::1", "100.64.0.0/10"]'
+```
+
+- [ ] Lock down the OpenClaw credentials directory permissions:
+Minor security restriction from gruops, not really important to me, but OpenClaw security audit likes it.
+```bash
+chmod 700 /Users/<openclaw-user>/.openclaw/credentials
+```
+
+## 7. Move OpenClaw secrets from openclaw.json to .env
+
+Execute these steps as the Mac Mini **OpenClaw non-admin user**.
+
+By default the OpenClaw installer and config tool writes API keys directly into `openclaw.json`. This step moves those keys into the `.env` file so that `openclaw.json` contains only env var references and can safely be tracked in git without leaking secrets. If you setup a model API key like OpenAI API, then OpenClaw created a .env for you and put it there.  Otherwise create it for yourself.
+
+### Add keys to .env
+
+- [ ] Open `~/.openclaw/.env` (create it if it does not exist) and add your keys:
+
+```bash
+OPENAI_API_KEY=sk-...
+OPENCLAW_GATEWAY_TOKEN=...
+TELEGRAM_BOT_TOKEN=...
+# Add any other keys you need here, one per line
+```
+
+- [ ] Restrict access permissions:
+```bash
+chmod 600 ~/.openclaw/.env
+```
+
+### Update openclaw.json with env references
+
+- [ ] Replace the hard-coded key values in `openclaw.json` with env var references. The relevant sections will look something like this after the change:
+
+```json
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "allowFrom": [],
+      "groupPolicy": "disabled",
+      "streamMode": "partial"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    },
+```
+
+**Note:** The `OPENAI_API_KEY` is already recognized inside OpenClaw and does not need to go into `openclaw.json`.
+
+- [ ] Restart openclaw gateway: `openclaw gateway restart`
+
+## Final Thoughts
+
+If you followed these steps the Mac Mini should be in good shape for running OpenClaw in a secure but practical way.  OpenClaw has dramatic autonomy in this setup and theoretically its Mac user could be compromised, but the machine is hardened from the agent application.  This setup is to max autonomy and not get totally pwned. Like all OpenClaw admins you'll have to watch out for possible prompt injections but that goes along with generally keeping an eye on the agent, so is not that special.
+
+Something to think about after you get going is setting up some kind of backup of projects and data from the machine.  Like having photos on a phone, you probably want to think about backups of your agent after you get it working.

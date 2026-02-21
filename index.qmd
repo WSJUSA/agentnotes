@@ -8,6 +8,20 @@ url: /
 ::: {.page-card-grid}
 
 ::: {.page-card}
+### Easy Security for OpenClaw on a Mac Mini
+
+::: {.summary-meta}
+The Step-by-step guide you have been looking for
+:::
+
+::: {.summary-excerpt}
+Run OpenClaw on a Mac Mini with security that protects the Mac without limiting autonomous operation. Every command and config setting is provided. Check them off as you go, and you're done.
+:::
+
+[Read Guide →](/projects/vibes/openclaw-macmini-security.html){.read-more-btn}
+:::
+
+::: {.page-card}
 ### DSPy MIPROv2 Configuration Guide
 
 ::: {.summary-meta}
@@ -54,7 +68,7 @@ Learn about the DSPy COPRO optimizer and how to observe its optimization runs wi
 
 # Welcome to Agent Notes:
 
-🚀 This is my personal space for exploring the world of training AI agents. 
+🚀 This is my personal space for exploring the world of training AI agents.
 
 While exploring AI development, I often stumble upon tips and insights from others on platforms like X that I find really useful. This is the place to capture some of these bits of knowledge here, giving credit where it's due, and keep track of what I've learned and to share it with anyone who is curious.
 

@@ -10,6 +10,8 @@ website:
         text: Now
       - text: Tutorials
         menu:
+          - href: projects/vibes/openclaw-macmini-security.html
+            text: Setup OpenClaw on Mac Mini
           - href: projects/dspy/notebooks/copro-tutorial.html
             text: COPRO Tutorial
           - href: projects/dspy/src/miprov2/miprov2_explained.html
@@ -30,4 +32,3 @@ execute:
   echo: true
   eval: false
   cache: false
-  
