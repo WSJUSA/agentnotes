@@ -1,10 +1,11 @@
 project:
   type: website
+  preview:
+    port: 4200
 
 website:
   title: "Agent Notes"
   navbar:
-    logo: assets/images/logo_v1.png
     right:
       - href: index.qmd
         text: Now
@@ -24,6 +25,7 @@ format:
   html:
     toc: true
     include-in-header: _quarto/custom-header.html
+    include-after-body: _quarto/theme-toggle-light-fix.html
     theme:
       light: journal
       dark: darkly

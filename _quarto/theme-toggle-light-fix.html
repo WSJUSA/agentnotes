@@ -1,0 +1,12 @@
+<style type="text/css">
+/* Theme bakes white fill into the toggle SVG via $navbar-light-color.
+   color/currentColor won't help. Use filter to turn white icon to black. */
+html body:not(.quarto-dark) .navbar .quarto-navbar-tools .quarto-navigation-tool .bi::before,
+html body:not(.quarto-dark) .navbar .quarto-navbar-tools a.quarto-color-scheme-toggle .bi::before {
+  filter: brightness(0) !important;
+}
+html body:not(.quarto-dark) .navbar .quarto-navbar-tools .quarto-navigation-tool .bi::before:hover,
+html body:not(.quarto-dark) .navbar .quarto-navbar-tools a.quarto-color-scheme-toggle:hover .bi::before {
+  filter: brightness(0.2) !important;
+}
+</style>
