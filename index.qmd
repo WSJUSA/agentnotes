@@ -8,7 +8,7 @@ url: /
 ::: {.page-card-grid}
 
 ::: {.page-card}
-### Easy Security for OpenClaw on a Mac Mini
+### Easy Secure Setup of OpenClaw on a Mac Mini
 
 ::: {.summary-meta}
 The Step-by-step guide you have been looking for

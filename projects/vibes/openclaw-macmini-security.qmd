@@ -1,5 +1,5 @@
 ---
-title: "Easy Security for OpenClaw on a Mac Mini"
+title: "Easy Secure Setup of OpenClaw on a Mac Mini"
 author: "Will James"
 date: last-modified
 description: "Setup OpenClaw on a Mac Mini with good enough security that doesn't decapitate your agent."
