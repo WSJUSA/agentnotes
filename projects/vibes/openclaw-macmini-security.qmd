@@ -6,7 +6,7 @@ description: "Setup OpenClaw on a Mac Mini with good enough security that doesn'
 ---
 
 ::: {.article-banner}
-![OpenClaw Mac Mini hardening](../../assets/images/openclaw_hardening_banner.jpg)
+![OpenClaw Mac Mini hardening](../../assets/images/openclaw_hardening_banner2.png)
 :::
 
 # The Step by Step Guide You Have Been Looking For
