@@ -11,7 +11,7 @@ description: "Setup OpenClaw on a Mac Mini with good enough security that doesn'
 
 # The Step by Step Guide You Have Been Looking For
 
-This guide is for you if you want to run OpenClaw on a Mac Mini with security that will protect the Mac from outside attack and OpenClaw itself, without decapitating the magic ability of OpenClaw to run autonomously. What this guide does differently than many other guides I reviewed before deciding to write my own are:
+This guide is for you if you want to run OpenClaw on a Mac Mini with security that will protect the Mac from outside attack and OpenClaw itself, without decapitating the magic ability of OpenClaw to run autonomously. What this guide does differently than many other guides I reviewed before deciding to write my own:
 
 1. Keep it simple to important security configurations
 2. Provide precise detailed steps for configurations and commands that need to be run.
@@ -38,7 +38,7 @@ Here are the steps you will go through:
 
 ## 2. Setting up Mac Mini Users
 
-Plugin and startup your Mac Mini and start following the setup.  Youre going to use the first gmail account for the admin users to do the initial setup of the device.
+Plugin and startup your Mac Mini and start following the setup.  You are going to use the first gmail account for the admin user to do the initial setup of the device.
 
 - [ ] **Set up an Apple ID that is only for the OpenClaw device**, using the dedicated Gmail account. *This avoids accidental syncing of iCloud, Messages, Photos, or other data from your personal or other-purpose Apple ID.*
 - [ ] **Complete normal macOS setup to create the admin account** on the Mac Mini (this becomes your `<macmini-admin-user>` for installs, Remote Management, SSH setup, etc.).  This user will need a different password than the Apple ID account password.
