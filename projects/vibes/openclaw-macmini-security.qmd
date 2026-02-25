@@ -1,8 +1,8 @@
 ---
-title: "Easy Secure Setup of OpenClaw on a Mac Mini"
+title: "Easiest Secure Setup of OpenClaw on a Mac Mini"
 author: "Will James"
 date: last-modified
-description: "Setup OpenClaw on a Mac Mini with good enough security that doesn't decapitate your agent."
+description: "🦞 Setup OpenClaw on a Mac Mini with simple security that doesn't decapitate your agent."
 ---
 
 ::: {.article-banner}
@@ -11,9 +11,13 @@ description: "Setup OpenClaw on a Mac Mini with good enough security that doesn'
 
 # The Step by Step Guide You Have Been Looking For
 
-This guide is for you if you want to run OpenClaw on a Mac Mini with security that will protect the Mac from outside attack and OpenClaw itself, without decapitating the magic ability of OpenClaw to run autonomously. What this guide does differently than many other guides I reviewed before deciding to write my own:
+This guide is for you if you want to run OpenClaw on a Mac Mini with good security that will protect the Mac from outside attack and from OpenClaw itself, and preserve OpenClaw's to run autonomously.
 
-1. Keep it simple to important security configurations
+A lot of security guides are overly convcerned with so many possibilities they effectively makde OpenClaw mantenance a full time job and completely disable its ability to do anything effetive as an assistant.
+
+What this guide does differently than many other guides I reviewed before deciding to write my own:
+
+1. Keeps it simple to only important security configurations
 2. Provide precise detailed steps for configurations and commands that need to be run.
 
 A lot of guides say to install xyz or configure some setting - but leave out the *HOW*.  This guide gives you every detail while keeping things as simple as possible.
