@@ -11,6 +11,8 @@ website:
         text: Now
       - text: Tutorials
         menu:
+          - href: projects/vibes/selecting-custom-memory-systems-for-openclaw-agents.html
+            text: Three Memory Upgrades
           - href: projects/vibes/openclaw-macmini-security.html
             text: Setup OpenClaw on Mac Mini
           - href: projects/dspy/notebooks/copro-tutorial.html

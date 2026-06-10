@@ -8,6 +8,20 @@ url: /
 ::: {.page-card-grid}
 
 ::: {.page-card}
+### Three Memory Upgrades You Need for Your OpenClaw Agents
+
+::: {.summary-meta}
+Lossless recall, local memory search, and durable knowledge
+:::
+
+::: {.summary-excerpt}
+Build an OpenClaw memory stack with lossless-claw for exact history, QMD for local memory-file search, and ByteRover for curated durable knowledge.
+:::
+
+[Read Guide →](/projects/vibes/selecting-custom-memory-systems-for-openclaw-agents.html){.read-more-btn}
+:::
+
+::: {.page-card}
 ### Easy Secure Setup of OpenClaw on a Mac Mini
 
 ::: {.summary-meta}
