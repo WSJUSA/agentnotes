@@ -18,7 +18,7 @@ Lossless recall, local memory search, and durable knowledge
 Build an OpenClaw memory stack with lossless-claw for exact history, QMD for local memory-file search, and ByteRover for curated durable knowledge.
 :::
 
-[Read Guide →](/projects/vibes/selecting-custom-memory-systems-for-openclaw-agents.html){.read-more-btn}
+[Read Guide →](/projects/vibes/openclaw-memory-updates.html){.read-more-btn}
 :::
 
 ::: {.page-card}
