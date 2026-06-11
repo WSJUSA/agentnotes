@@ -63,9 +63,7 @@ From there, you can tune `lossless-claw` per agent and per session type. Some ag
 
 Adding [QMD](https://github.com/tobi/qmd) to OpenClaw's memory system helps it find and reuse its saved memory faster and more accurately.
 
-Without QMD, OpenClaw would have to search through its memory more blindly, which makes it harder to surface the right saved note at the right time.
-
-BM25 also gives OpenClaw a stronger text-search layer, so it can rank the most relevant saved notes higher instead of just matching words more crudely.
+QMD includes search technology BM25 which gives OpenClaw a stronger text-search layer, so it can rank the most relevant saved notes higher instead of just matching words more crudely.
 
 That makes memory retrieval a quicker, cheaper way to reach key historical records, while `lossless-claw` remains the higher-fidelity layer when exact recall is needed.
 
