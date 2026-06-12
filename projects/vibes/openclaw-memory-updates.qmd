@@ -159,7 +159,7 @@ The storage split is the important part:
 
 - `~/.openclaw/lcm.db` for raw conversation truth
 - each agent's `MEMORY.md` and `memory/` for local working memory
-- `~/Knowledge` for curated durable knowledge
+- [ByteRover](https://docs.byterover.dev/) for curated durable knowledge
 
 ## Aligned to Industry Memory Trends
 
