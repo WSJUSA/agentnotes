@@ -4,7 +4,7 @@ project:
     port: 4200
 
 website:
-  title: "Agent Notes"
+  title: "AgentNotes"
   navbar:
     right:
       - href: index.qmd
