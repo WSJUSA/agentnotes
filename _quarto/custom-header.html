@@ -403,12 +403,15 @@ body.quarto-dark .dropdown-item:hover,
 }
 
 /* ===== SIDEBAR / TOC ===== */
-#TOC #toc-title {
+#TOC #toc-title,
+[data-contact-box="true"] h2 {
   font-size: 0.9rem !important;
 }
 
 .sidebar .nav-link,
-#TOC .nav-link {
+#TOC .nav-link,
+[data-contact-box="true"] p,
+[data-contact-box="true"] a {
   font-family: 'Space Mono', monospace !important;
   font-size: 13px !important;
 }
@@ -899,6 +902,15 @@ document.addEventListener('DOMContentLoaded', function() {
       closeLightbox();
     }
   });
+
+  var tocSidebar = document.querySelector('#quarto-margin-sidebar #TOC, .sidebar nav[role="doc-toc"]');
+  if (tocSidebar && !document.querySelector('[data-contact-box="true"]')) {
+    var contactBox = document.createElement('section');
+    contactBox.setAttribute('data-contact-box', 'true');
+    contactBox.setAttribute('aria-label', 'Contact information');
+    contactBox.innerHTML = '<h2 id="toc-title">Contact Me</h2><p>My name is Will James.</p><p>If you would like to get in touch please reach out on socials <a href="https://www.linkedin.com/in/wsjames/">Linkedin</a> or <a href="https://x.com/willjamesusa">X</a>.</p>';
+    tocSidebar.insertAdjacentElement('afterend', contactBox);
+  }
 
   // Add smooth scrolling for anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');

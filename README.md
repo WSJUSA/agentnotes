@@ -28,7 +28,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 - **Author**: Will James
-- **Social**: [LinkedIn](https://www.linkedin.com/in/wsjames/) [X Platform](https://x.com/heylegacyguy)
+- **Social**: [LinkedIn](https://www.linkedin.com/in/wsjames/) [X Platform](https://x.com/willjamesusa)
 
 ## Acknowledgments
 
