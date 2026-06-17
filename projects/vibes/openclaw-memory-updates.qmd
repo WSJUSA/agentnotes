@@ -11,8 +11,6 @@ description: "A practical OpenClaw memory stack using lossless-claw, QMD, and By
 
 If you are building on OpenClaw, context and memory can be confusing. This article offers a rich memory setup that will improve agent performance and yet is easy to install.
 
-In this article, I am going to show you why I picked three layers to manage memory in my OpenClaw implementation. That architecture is made up of three key parts:
-
 My OpenClaw is modified with 3 context /memory upgrades, each providing a different enhancement. Here are the 3 key updates and why they matter:
 
 - [lossless-claw](https://openclawdir.com/plugins/lossless-claw-a7dqhn) for exact conversation history and auditable recall
