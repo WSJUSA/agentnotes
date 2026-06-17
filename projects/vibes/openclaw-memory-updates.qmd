@@ -143,6 +143,8 @@ In `TOOLS.md`, it appends the short command reference agents can use when they n
 - **Sync:** `<brv-path> pull` / `<brv-path> push` (Sync with team - requires login)
 ```
 
+You can see these instructions are pretty directive. You may wish to tone them back a little to make the usage a little more optional to your agent, but these will get you started.
+
 After the OpenClaw integration is installed, connect ByteRover to the model provider used by OpenClaw.
 
 Here is an example for a Codex/OpenAI setup using GPT-5.5:
