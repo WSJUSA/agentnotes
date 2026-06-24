@@ -13,6 +13,8 @@ website:
         menu:
           - href: projects/vibes/openclaw-memory-updates.html
             text: Three Memory Upgrades
+          - href: projects/vibes/ai-photo-memories.html
+            text: Family Photo Metadata App
           - href: projects/vibes/openclaw-macmini-security.html
             text: Setup OpenClaw on Mac Mini
           - href: projects/dspy/notebooks/copro-tutorial.html

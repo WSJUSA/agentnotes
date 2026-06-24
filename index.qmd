@@ -8,6 +8,20 @@ url: /
 ::: {.page-card-grid}
 
 ::: {.page-card}
+### AI helped me save 150 years of family memories
+
+::: {.summary-meta}
+Custom metadata tooling for a family photo archive
+:::
+
+::: {.summary-excerpt}
+How a weekend of AI-assisted coding turned a fragile family-photo digitization workflow into a practical app for fast, durable metadata tagging.
+:::
+
+[Read Story →](/projects/vibes/ai-photo-memories.html){.read-more-btn}
+:::
+
+::: {.page-card}
 ### Three Memory Upgrades You Need for Your OpenClaw Agents
 
 ::: {.summary-meta}
