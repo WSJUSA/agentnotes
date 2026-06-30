@@ -21,6 +21,8 @@ If you have ever tried to archive family photos the right way, you know what I m
 
 Doing that for thousands of photos manually is a project that can easily stall out forever.
 
+![Family photo prints and archival materials laid out on a work table](../../assets/images/ai-photo-memories/imported-2-archive-table.jpg)
+
 Further my father, who is more than 80 years old now, would be the one inputting the metadata because he's the last person alive who knows anything about the photos.
 
 So I decided to build a tool that makes metadata tagging as easy as clicking a few buttons. I created the whole tool without writing a single line of code myself and was done in a few days thanks to using a code generator!
