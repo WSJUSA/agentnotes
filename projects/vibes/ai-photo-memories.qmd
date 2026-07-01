@@ -129,4 +129,4 @@ It is that reliable AI coding changed what I consider feasible as a single perso
 
 ## Why this matters
 
-This is what I mean when I say code generation has become real: not that every person becomes a unicorn founder, but that we can finally build high-quality custom tools for real-life problems, especially the personal ones where no product is quite right.
+This is what I mean when I say code generation has become achievable for anyone: not that every person becomes a unicorn founder, but that anyone can finally build high-quality custom tools for real-life problems, especially the personal ones where no product is quite right.
